@@ -20,7 +20,8 @@ const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
             if (error) {
                 console.log(error)
             } else {
-                req.headers.user = payload
+                console.log(payload)
+                req.headers.id = payload.id
                 next()
             }
         })

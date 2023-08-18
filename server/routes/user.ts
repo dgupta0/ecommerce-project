@@ -36,4 +36,57 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
         res.status(200).send({ token, message: `token generated for user ${user._id} ` })
     }
 })
+router.get("/products", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const product = await Product.find()
+    res.status(200).json(product)
+})
+
+router.post("/products/:productID", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.headers.id;
+    console.log(req.headers.id)
+    const productID = req.params.productID
+    const product = await Product.findById(productID);
+    const user = await User.findById(userId)
+    if (!product) {
+        res.status(404).send("product not found")
+        return
+    }
+    if (!user) {
+        res.status(404).send("user not found")
+        return
+    }
+    const productObjectId = mongoose.Types.ObjectId.createFromHexString(productID);
+    user.purchasedProducts.push(productObjectId);
+    await user.save()
+    res.status(200).json({ message: "product purchased sucessfully" })
+
+})
+router.get("/cart", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.headers.id;
+    const user = await User.findById(userId).populate("purchasedProducts")
+    if (user) {
+        res.status(200).json(user.purchasedProducts)
+    } else {
+        res.status(400).send("user not found")
+    }
+})
+router.delete("/cart", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.headers.id;
+    const productID = req.body.productID
+    const user = await User.findById(userId)
+    if (!user) {
+        res.status(404).send("user not found")
+        return
+    }
+    const filterProducts = user.purchasedProducts.filter(id => {
+        console.log(id !== productID, id, productID)
+        if (id.toString() !== productID) {
+            return id
+        }
+    })
+    console.log(filterProducts)
+    user.purchasedProducts = filterProducts;
+    await user.save()
+    res.status(200).send("product deleted successfully")
+})
 export default router 
