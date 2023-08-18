@@ -32,7 +32,6 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
     } else if (!username || !password) {
         res.status(411).send("please enter both username and password")
     } else {
-        // const currentuser = await user.findOne({  username })
         const token = jwt.sign({ id: user._id }, Secret, { expiresIn: '1h' });
         res.status(200).send({ token, message: `token generated for user ${user._id} ` })
     }

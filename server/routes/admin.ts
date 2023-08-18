@@ -32,9 +32,51 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
     } else if (!username || !password) {
         res.status(411).send("please enter both username and password")
     } else {
-        // const currentAdmin = await Admin.findOne({  username })
+
         const token = jwt.sign({ id: admin._id }, Secret, { expiresIn: '1h' });
         res.status(200).send({ token, message: `token generated for ${admin._id} ` })
     }
+
 })
+
+router.post("/products", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const { title, description, price, imageLink, published } = req.body;
+    const newProduct = new Product({ title, description, price, imageLink, published });
+    await newProduct.save()
+    res.status(200).json({ message: `created ${newProduct._id}` })
+})
+
+router.get("/products", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const product = await Product.find()
+    res.status(200).json(product)
+})
+router.put("/products/:productID", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const productID = req.params.productID
+    console.log(productID)
+    const product = await Product.findOneAndUpdate({ _id: productID }, {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        imageLink: req.body.imageLink,
+        publshed: req.body.published
+    },
+        { new: true })
+    if (product) {
+        res.status(200).json(product)
+    } else {
+        res.status(500).json({ message: "no product found" })
+    }
+
+})
+router.delete("/products", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const productID = req.body.productID
+    const product = await Product.findOneAndDelete({ _id: productID })
+    if (product) {
+        res.status(200).json({ message: `${product} deleted sucessfully` })
+    } else {
+        res.status(500).json({ message: "no product found" })
+    }
+})
+
+
 export default router 

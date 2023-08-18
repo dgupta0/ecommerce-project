@@ -6,16 +6,21 @@ type Payload = {
     id: string
 } | undefined
 const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
+
     const authHead = req.headers.authorization
+
     if (!authHead) {
+
         res.status(401).send("error while getting the auth")
     } else {
+
         const token = authHead.split(" ")[1]
+
         jwt.verify(token, Secret, (error, payload: any) => {
             if (error) {
                 console.log(error)
             } else {
-                req.headers.id = payload.id
+                req.headers.user = payload
                 next()
             }
         })
