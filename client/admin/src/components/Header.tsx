@@ -41,22 +41,24 @@ export default function Header() {
 
     React.useEffect(() => {
         async function getUsername() {
-            try {
-                const token = localStorage.getItem("token")
-                console.log(token)
-                const res = await axios.get(`${path}/me`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
+            const token = localStorage.getItem("token")
+            if (token) {
+                try {
+                    console.log(token)
+                    const res = await axios.get(`${path}/me`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        }
+                    })
+                    if (res.status === 201) {
+                        setUsername(res.data)
+                    } else {
+                        enqueueSnackbar("User is Logged but can't get username from API")
                     }
-                })
-                if (res.status === 201) {
-                    setUsername(res.data)
-                } else {
-                    enqueueSnackbar("User is Logged but can't get username from API")
-                }
 
-            } catch (error) {
-                console.log(error)
+                } catch (error) {
+                    console.log(error)
+                }
             }
 
         }
@@ -68,7 +70,7 @@ export default function Header() {
         setAnchorEl(null);
         setIsLogged(false)
         localStorage.removeItem("token")
-        navigate("/")
+        navigate("/login")
     }
 
     return (
@@ -95,7 +97,7 @@ export default function Header() {
                             Hello {username}
                         </Typography>
                         <Button variant="text"
-                            component="a" href="/create">Add Product</Button>
+                            component="a" href="/create">Create Product</Button>
                         <Button variant="text"
                             component="a" href="/products">Products</Button>
                         <MenuItem

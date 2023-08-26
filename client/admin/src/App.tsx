@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Login from "./components/Login"
 import LoginContext from "./context/LoginContext";
 import { useState } from "react";
+import "../style.css"
 
 import Products from "./components/Products";
 import Edit from "./components/Edit";
@@ -27,7 +28,7 @@ function App() {
             < Route path="/login" element={<Login />} />
             < Route path="/products" element={<Products />} />
             < Route path="/create" element={<Create />} />
-            < Route path="/edit" element={<Edit />} />
+            < Route path="/products/:id" element={<Edit />} />
           </Routes>
         </BrowserRouter>
       </LoginContext.Provider>

@@ -58,7 +58,7 @@ router.put("/products/:productID", authenticateJWT, async (req: Request, res: Re
         description: req.body.description,
         price: req.body.price,
         imageLink: req.body.imageLink,
-        publshed: req.body.published
+        published: req.body.published
     },
         { new: true })
     if (product) {
@@ -72,7 +72,8 @@ router.delete("/products", authenticateJWT, async (req: Request, res: Response, 
     const productID = req.body.productID
     const product = await Product.findOneAndDelete({ _id: productID })
     if (product) {
-        res.status(200).json({ message: `${product} deleted sucessfully` })
+        const filteredProducts = await Product.find()
+        res.status(200).json(filteredProducts)
     } else {
         res.status(500).json({ message: "no product found" })
     }

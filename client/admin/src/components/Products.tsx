@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import { Grid, Card, CardActions, CardContent, CardMedia, Typography, Button } from "@mui/material";
 import axios from "axios";
 import path from "../config";
+import { useNavigate } from "react-router-dom";
+
+type Product = {
+    _id: string;
+    title: string;
+    description: string;
+    price: string;
+    imageLink: string;
+};
 
 type ProductProps = {
     key: string,
@@ -10,16 +19,9 @@ type ProductProps = {
     price: string
     id: string;
     imageLink: string;
+    setData: React.Dispatch<React.SetStateAction<Product[]>>
 }
 export default function Products() {
-    type Product = {
-        _id: string;
-        title: string;
-        description: string;
-        price: string;
-        imageLink: string;
-    };
-
     const [data, setData] = useState<Product[]>([]);
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -44,6 +46,7 @@ export default function Products() {
                     price={p.price}
                     id={p._id}
                     imageLink={p.imageLink}
+                    setData={setData}
                 />)}
             </Grid>
         </main>
@@ -51,23 +54,39 @@ export default function Products() {
 }
 
 function Product(props: ProductProps) {
-    function handleDelete(id: string) {
-        console.log("delete", id)
+    const navigate = useNavigate()
+    async function handleDelete(productID: string) {
+        const token = localStorage.getItem("token")
+        const res = await axios.delete(`${path}/products`, {
+            data: { productID },
+            headers: {
+                Authorization: `Bearer ${token}`
+
+            }
+        })
+        props.setData(res.data)
     }
     function handleEdit(id: string) {
-        console.log("delete", id)
+        navigate(`/products/${id}`)
     }
     return (
 
         <Grid item xs={12} sm={6} md={6} lg={4} >
-            <Card sx={{ margin: "auto", alignSelf: "center", boxShadow: "5px 5px 10px #45c09f", }}>
+            <Card sx={
+                {
+                    margin: "auto",
+                    alignSelf: "center",
+                    boxShadow: "5px 5px 10px #45c09f",
+                    height: "99%", width: "99%",
+                    display: "grid"
+                }}>
                 <CardMedia
                     sx={{ height: 140 }}
                     image={props.imageLink}
                     title={props.id}
                 />
                 <CardContent>
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: "0.5rem" }}>
                         <Typography gutterBottom variant="h5" component="div">
                             {props.title}
                         </Typography>
@@ -79,9 +98,9 @@ function Product(props: ProductProps) {
                         {props.description}
                     </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions style={{ alignSelf: "flex-end" }}>
                     <Button onClick={() => handleEdit(props.id)} variant="contained" size="small">Edit</Button>
-                    <Button style={{ backgroundColor: "#D10000", color: "white", border: "none" }} onClick={() => handleDelete(props.id)} variant="outlined" size="small">Delete</Button>
+                    <Button variant="contained" color="error" onClick={() => handleDelete(props.id)} size="small">Delete</Button>
                 </CardActions>
             </Card>
         </Grid>

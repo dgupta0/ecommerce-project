@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Login from "./components/Login"
 import LoginContext from "./context/LoginContext";
 import { useState, useEffect } from "react";
+import "../style.css"
 
 
 function App() {
