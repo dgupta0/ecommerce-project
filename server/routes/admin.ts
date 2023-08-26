@@ -20,8 +20,8 @@ router.post("/signup", async (req: Request, res: Response, next: NextFunction) =
         const newAdmin = new Admin(newObj)
         await newAdmin.save()
         // const currentAdmin = await Admin.findOne({  username })
-        const token = jwt.sign({ id: newAdmin._id }, Secret, { expiresIn: '1h' });
-        res.status(200).send({ token, message: `token generated for user ${newAdmin._id} ` })
+        const token = jwt.sign({ id: newAdmin._id, username: newAdmin.username }, Secret, { expiresIn: '1h' });
+        res.status(201).send({ token, message: `token generated for user ${newAdmin._id} ` })
     }
 })
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
@@ -33,8 +33,8 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
         res.status(411).send("please enter both username and password")
     } else {
 
-        const token = jwt.sign({ id: admin._id }, Secret, { expiresIn: '1h' });
-        res.status(200).send({ token, message: `token generated for ${admin._id} ` })
+        const token = jwt.sign({ id: admin._id, username: admin.username }, Secret, { expiresIn: '1h' });
+        res.status(201).send({ token, message: `token generated for ${admin._id} ` })
     }
 
 })
@@ -76,6 +76,12 @@ router.delete("/products", authenticateJWT, async (req: Request, res: Response, 
     } else {
         res.status(500).json({ message: "no product found" })
     }
+})
+
+router.get("/me", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const username = req.headers.username
+    console.log(username)
+    res.status(201).json(username)
 })
 
 

@@ -1,8 +1,29 @@
 body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #00845c;
+    margin: 0;
+}
+
+.header {
+    background-color: #ffffff;
+    padding: 1rem;
+}
+
+.create-product {
+    min-width: 300px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.create-page-form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    gap: 1rem;
 }
 
 .form {
+    margin-top: 5rem !important;
     display: flex;
     flex-direction: column;
     gap: 1rem;

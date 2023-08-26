@@ -20,8 +20,8 @@ router.post("/signup", async (req: Request, res: Response, next: NextFunction) =
         const newUser = new User(newObj)
         await newUser.save()
         // const currentuser = await user.findOne({  username })
-        const token = jwt.sign({ id: newUser._id }, Secret, { expiresIn: '1h' });
-        res.status(200).send({ token, message: `token generated for ${newUser._id} ` })
+        const token = jwt.sign({ id: newUser._id, username: newUser.username }, Secret, { expiresIn: '1h' });
+        res.status(201).send({ token, message: `token generated for ${newUser._id} ` })
     }
 })
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
@@ -32,13 +32,13 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
     } else if (!username || !password) {
         res.status(411).send("please enter both username and password")
     } else {
-        const token = jwt.sign({ id: user._id }, Secret, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, username: user.username }, Secret, { expiresIn: '1h' });
         res.status(200).send({ token, message: `token generated for user ${user._id} ` })
     }
 })
 router.get("/products", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
     const product = await Product.find()
-    res.status(200).json(product)
+    res.status(201).json(product)
 })
 
 router.post("/products/:productID", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
@@ -88,5 +88,10 @@ router.delete("/cart", authenticateJWT, async (req: Request, res: Response, next
     user.purchasedProducts = filterProducts;
     await user.save()
     res.status(200).send("product deleted successfully")
+})
+router.get("/me", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
+    const username = req.headers.username
+    console.log(username)
+    res.status(201).json(username)
 })
 export default router 
