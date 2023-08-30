@@ -1,6 +1,8 @@
 [
     {
-        "_id": "60d68e1328240f0015a8c5e1",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e1"
+        },
         "title": "UNIFACTOR Mens Running Shoes",
         "price": 50,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/42d4d057-8704-4174-8d74-e5e9052677c6.png",
@@ -8,7 +10,9 @@
         "description": "High-quality running shoes for men."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e2",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e2"
+        },
         "title": "YONEX Smash Badminton Racquet",
         "price": 100,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/64b930f7-3c82-4a29-a433-dbc6f1493578.png",
@@ -16,7 +20,9 @@
         "description": "Professional badminton racquet for excellent performance."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e3",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e3"
+        },
         "title": "Tan Leatherette Weekender Duffle",
         "price": 150,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/ff071a1c-1099-48f9-9b03-f858ccc53832.png",
@@ -24,7 +30,9 @@
         "description": "Stylish weekender duffle bag made of tan leatherette."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e4",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e4"
+        },
         "title": "The Minimalist Slim Leather Watch",
         "price": 60,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/5b478a4a-bf81-467c-964c-1881887799b7.png",
@@ -32,7 +40,9 @@
         "description": "Elegant and slim leather watch with minimalist design."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e5",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e5"
+        },
         "title": "Atomberg 1200mm BLDC motor",
         "price": 80,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/e8e0832c-8f16-4468-95a0-8aaed387a169.png",
@@ -40,7 +50,9 @@
         "description": "Energy-efficient BLDC motor for fans and appliances."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e6",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e6"
+        },
         "title": "Bonsai Spirit Tree Table Lamp",
         "price": 80,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/b49ee2dc-6458-42de-851d-b014ac24cd8e.png",
@@ -48,7 +60,9 @@
         "description": "Unique table lamp inspired by bonsai trees."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e7",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e7"
+        },
         "title": "Stylecon 9 Seater RHS Sofa Set",
         "price": 650,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/7ad56699-20c9-4778-a783-4021e5f0864c.png",
@@ -56,7 +70,9 @@
         "description": "Spacious 9-seater sofa set for your living room."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e8",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e8"
+        },
         "title": "Diamond Pendant (0.01 ct, IJ-SI)",
         "price": 1000,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/95d6d42d-3a37-4efb-ad10-3bcbbb599856.png",
@@ -64,7 +80,9 @@
         "description": "Exquisite diamond pendant with 0.01 ct diamonds."
     },
     {
-        "_id": "60d68e1328240f0015a8c5e9",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5e9"
+        },
         "title": "Apple iPad Pro with Apple M1 chip",
         "price": 900,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/82ac2e7b-e4dd-4a5b-8dbc-3260225d7eb2.png",
@@ -72,7 +90,9 @@
         "description": "Powerful iPad Pro featuring the Apple M1 chip."
     },
     {
-        "_id": "60d68e1328240f0015a8c5ea",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5ea"
+        },
         "title": "OnePlus (55 inches) Q1 Series 4K",
         "price": 1200,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/a9ca1e8b-8783-4be3-83f8-d06409016e15.png",
@@ -80,7 +100,9 @@
         "description": "High-quality 55-inch Q1 Series 4K TV by OnePlus."
     },
     {
-        "_id": "60d68e1328240f0015a8c5eb",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5eb"
+        },
         "title": "Thinking, Fast and Slow",
         "price": 15,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/cdb64440-5e95-4aaa-858b-8c12ee316d93.png",
@@ -88,7 +110,9 @@
         "description": "Bestselling book exploring human decision-making."
     },
     {
-        "_id": "60d68e1328240f0015a8c5ec",
+        "_id": {
+            "$oid": "60d68e1328240f0015a8c5ec"
+        },
         "title": "GREY DOUBLE BUTTON BLAZER",
         "price": 75,
         "imageLink": "https://crio-directus-assets.s3.ap-south-1.amazonaws.com/869ec5e2-52d2-4b8e-bc6b-57eace9ab39e.png",

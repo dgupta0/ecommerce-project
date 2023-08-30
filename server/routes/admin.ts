@@ -7,6 +7,7 @@ import { Admin, Product } from "../db";
 import jwt from "jsonwebtoken";
 
 
+
 router.post("/signup", async (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
     console.log(req.body)
@@ -59,8 +60,8 @@ router.put("/products/:productID", authenticateJWT, async (req: Request, res: Re
         price: req.body.price,
         imageLink: req.body.imageLink,
         published: req.body.published
-    },
-        { new: true })
+    }, { new: true })
+    console.log(product)
     if (product) {
         res.status(200).json(product)
     } else {
@@ -70,6 +71,7 @@ router.put("/products/:productID", authenticateJWT, async (req: Request, res: Re
 })
 router.delete("/products", authenticateJWT, async (req: Request, res: Response, next: NextFunction) => {
     const productID = req.body.productID
+
     const product = await Product.findOneAndDelete({ _id: productID })
     if (product) {
         const filteredProducts = await Product.find()
